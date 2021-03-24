@@ -1,0 +1,35 @@
+﻿@page
+@model asp_net_inlamning.Pages.EventsModel
+
+@{
+    ViewData["Title"] = "Events";
+}
+
+<h1>Events</h1>
+
+<div class="accordion" id="accordionExample">
+    @foreach (var item in Model.Event)
+    {
+        <div class="card">
+            <div class="card-header" id="heading-@Html.DisplayFor(modelItem => item.Id)">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-@Html.DisplayFor(modelItem => item.Id)" aria-expanded="true" aria-controls="#collapse-@Html.DisplayFor(modelItem => item.Id)">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapse-@Html.DisplayFor(modelItem => item.Id)" class="collapse" aria-labelledby="#heading-@Html.DisplayFor(modelItem => item.Id)" data-parent="#accordionExample">
+                <div class="card-body">
+                    <p class="d-block">
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </p>
+                    <p>@Html.DisplayFor(modelItem => item.Date)</p>
+                    <p>@Html.DisplayFor(modelItem => item.Place)</p>
+                    <p>@Html.DisplayFor(modelItem => item.SpotsAvailable)</p>
+                    <a class="btn btn-primary" asp-page="./JoinEvent" asp-route-id="@item.Id">Join event</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
